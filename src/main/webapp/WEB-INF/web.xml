@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>SoutenaPro</display-name>
+
+    <!-- ============================ Filtres ============================ -->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>filters.EncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>filters.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/enseignant/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/etudiant/*</url-pattern>
+    </filter-mapping>
+
+    <!-- ============================ Servlets =========================== -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>controllers.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>controllers.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>controllers.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EnseignantServlet</servlet-name>
+        <servlet-class>controllers.EnseignantServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EnseignantServlet</servlet-name>
+        <url-pattern>/enseignant/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EtudiantServlet</servlet-name>
+        <servlet-class>controllers.EtudiantServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EtudiantServlet</servlet-name>
+        <url-pattern>/etudiant/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============================ Session ============================ -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>false</secure>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <!-- =========================== Bienvenue =========================== -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- ============================ Erreurs ============================ -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/pages/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/pages/error.jsp</location>
+    </error-page>
+
+</web-app>
