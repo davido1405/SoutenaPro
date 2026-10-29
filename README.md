@@ -17,7 +17,7 @@ Projet indépendant, créé dans `Projets JEE/SoutenaPro`, sans aucune modificat
 | Java | 17 (`--release 17`) |
 | Vues | JSP + JSTL 3.0 (tags `jakarta.tags.*`) |
 | Front | Tailwind CSS (CDN), police Inter, composants maison |
-| Base de données | MySQL 8 (`soutena_pro`) |
+| Base de données | MySQL 8 (`soutena_pro`, mêmes identifiants que `ProjetSoutenance`) |
 | Accès données | JDBC + DAO, requêtes préparées |
 | Sécurité | SHA-256 pour les mots de passe, filtre d'authentification par rôle, en-têtes anti-cache |
 
@@ -92,23 +92,9 @@ Les comptes créés depuis l'interface reçoivent le mot de passe `123456` et un
 
 ### 4.1 Base de données
 
-Deux méthodes au choix.
-
-**Avec le client MySQL :**
-
-```bash
-mysql -u root -p < database/install.sql
-```
-
-**Sans client MySQL (utilitaire JDBC fourni) :**
-
-```powershell
-cd database
-.\install-db.ps1 -User root -Password "votre_mot_de_passe"
-```
-
-Le script `install.sql` crée la base `soutena_pro`, le schéma, les index, les contraintes
-et un jeu de données réaliste (10 étudiants, 6 enseignants, 10 soutenances dont 3 évaluées).
+La base `soutena_pro` doit déjà exister sur le serveur MySQL, avec son schéma et ses
+données. Aucun script d'installation n'est fourni ni exécuté automatiquement : la
+création, l'installation et la gestion de la base restent entièrement manuelles.
 
 ### 4.2 Compilation et déploiement
 
@@ -149,21 +135,17 @@ tout est correct, `1` sinon.
 
 ### 4.4 Paramètres de connexion
 
-Valeurs par défaut : `root` sans mot de passe sur `127.0.0.1:3306`, base `soutena_pro`.
-Elles peuvent être surchargées sans recompiler :
+La connexion est définie dans `src/main/java/connection/ConnexionBD.java` avec la même
+logique que `ProjetSoutenance` :
 
-| Variable | Défaut |
+| Paramètre | Valeur |
 |---|---|
-| `SOUTENAPRO_DB_URL` | `jdbc:mysql://127.0.0.1:3306/soutena_pro?...` |
-| `SOUTENAPRO_DB_USER` | `root` |
-| `SOUTENAPRO_DB_PASSWORD` | *(vide)* |
-| `SOUTENAPRO_DB_SERVER` | serveur sans base, utilisé par l'installateur |
+| URL | `jdbc:mysql://127.0.0.1:3306/soutena_pro?useSSL=false&serverTimezone=UTC` |
+| Utilisateur | `root` |
+| Mot de passe | *(vide)* |
 
-Exemple sous Windows :
-
-```powershell
-$env:SOUTENAPRO_DB_PASSWORD = "secret"
-```
+Ces valeurs sont compilées dans l'application : pour changer de serveur ou
+d'identifiants, modifiez `ConnexionBD.java` puis relancez `.\build.ps1 -Deploy`.
 
 ---
 
@@ -172,12 +154,8 @@ $env:SOUTENAPRO_DB_PASSWORD = "secret"
 ```
 SoutenaPro/
 ├── build.ps1                  Compilation + packaging + déploiement
-├── database/
-│   ├── install.sql            Schéma + données de démonstration
-│   ├── InstallerBD.java       Exécuteur SQL via JDBC
-│   └── install-db.ps1         Script d'installation de la base
 ├── src/main/java/
-│   ├── connection/            Connexion JDBC paramétrable
+│   ├── connection/            Connexion JDBC
 │   ├── models/                Utilisateur, Étudiant, Enseignant, Soutenance, Jury, Évaluation
 │   ├── dao/                   UtilisateurDAO, ÉtudiantDAO, EnseignantDAO,
 │   │                          SoutenanceDAO, EvaluationDAO
