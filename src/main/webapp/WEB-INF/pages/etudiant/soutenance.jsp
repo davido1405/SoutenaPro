@@ -28,10 +28,10 @@
         <div class="mt-5 overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm shadow-slate-200/40">
             <div class="h-24 bg-gradient-to-r ${soutenance.statut == 'EVALUEE' ? 'from-emerald-700 via-accent-800 to-accent-900' : (soutenance.statut == 'ANNULEE' ? 'from-slate-500 via-slate-600 to-slate-700' : 'from-accent-600 via-accent-700 to-accent-900')}"></div>
             <div class="px-6 pb-6">
-                <div class="-mt-9 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                    <div class="flex items-end gap-4">
-                        <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border-4 border-white bg-accent-100 text-2xl font-bold text-accent-800 shadow-sm"><c:out value="${soutenance.initiales}"/></div>
-                        <div class="pb-1">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div class="flex items-start gap-4">
+                        <div class="-mt-9 flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border-4 border-white bg-accent-100 text-2xl font-bold text-accent-800 shadow-sm"><c:out value="${soutenance.initiales}"/></div>
+                        <div class="pt-2">
                             <p class="text-[11px] font-semibold uppercase tracking-wide text-slate-400">Ma soutenance</p>
                             <h2 class="mt-0.5 text-xl font-semibold tracking-tight text-slate-900"><c:out value="${soutenance.prenomEtudiant}"/> <c:out value="${soutenance.nomEtudiant}"/></h2>
                             <p class="mt-1 max-w-2xl text-[13px] leading-relaxed text-slate-500"><c:out value="${soutenance.sujet}"/></p>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pb-1">
+                    <div class="pt-2">
                         <c:choose>
                             <c:when test="${soutenance.statut == 'EVALUEE'}">
                                 <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>Résultat disponible</span>

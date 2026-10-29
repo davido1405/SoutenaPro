@@ -4,3 +4,4 @@ node_modules/
 *.class
 *.log
 .settings/org.eclipse.wst.server.core.prefs
+.pdf

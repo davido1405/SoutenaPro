@@ -28,10 +28,10 @@
 <div class="mt-5 overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm shadow-slate-200/40">
     <div class="h-24 bg-gradient-to-r from-slate-800 via-slate-900 to-accent-900"></div>
     <div class="px-6 pb-6">
-        <div class="-mt-9 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div class="flex items-end gap-4">
-                <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border-4 border-white bg-indigo-100 text-2xl font-bold text-indigo-700 shadow-sm"><c:out value="${enseignant.initiales}"/></div>
-                <div class="pb-1">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div class="flex items-start gap-4">
+                <div class="-mt-9 flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border-4 border-white bg-indigo-100 text-2xl font-bold text-indigo-700 shadow-sm"><c:out value="${enseignant.initiales}"/></div>
+                <div class="pt-2">
                     <h2 class="text-xl font-semibold tracking-tight text-slate-900"><c:out value="${enseignant.prenom}"/> <c:out value="${enseignant.nom}"/></h2>
                     <div class="mt-1 flex flex-wrap items-center gap-2 text-xs">
                         <span class="rounded-full bg-slate-100 px-2.5 py-1 font-medium text-slate-600"><c:out value="${enseignant.matricule}"/></span>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <p class="pb-1 text-xs text-slate-400">Compte enseignant</p>
+            <p class="pt-2 text-xs text-slate-400">Compte enseignant</p>
         </div>
     </div>
 </div>
